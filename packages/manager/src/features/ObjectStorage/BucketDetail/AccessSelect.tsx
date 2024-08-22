@@ -141,10 +141,8 @@ export const AccessSelect = React.memo((props: Props) => {
     ? 'CORS Enabled'
     : 'CORS Disabled';
 
-  const isCorsAvailable =
-    (variant === 'bucket' || variant === 'object') &&
-    endpointType !== 'E2' &&
-    endpointType !== 'E3';
+  const isCorsEnabled =
+    variant === 'bucket' && endpointType !== 'E2' && endpointType !== 'E3';
 
   const selectedOption =
     _options.find((thisOption) => thisOption.value === selectedACL) ??
@@ -187,7 +185,7 @@ export const AccessSelect = React.memo((props: Props) => {
         ) : null}
       </div>
 
-      {isCorsAvailable ? (
+      {isCorsEnabled ? (
         <FormControlLabel
           control={
             <Toggle
@@ -201,7 +199,7 @@ export const AccessSelect = React.memo((props: Props) => {
         />
       ) : null}
 
-      {isCorsAvailable ? (
+      {isCorsEnabled ? (
         <Typography>
           Whether Cross-Origin Resource Sharing is enabled for all origins. For
           more fine-grained control of CORS, please use another{' '}
